@@ -1,12 +1,46 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {brandColor, screenBackgroundColor} from '../style/colors';
-import {bigBigText} from '../style/typography';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 
-const MyBeerScreen = () => {
+import BCText from '../components/BCText';
+import {brandColor, screenBackgroundColor} from '../style/colors';
+import {headerSize} from '../style/typography';
+
+// const dummyBeer = {breweryName: 'Upland', beerName: 'Wheat'};
+
+// TODO: needs unique key
+// const dummyData = [dummyBeer, dummyBeer, dummyBeer];
+
+const MyBeerScreen = ({breweryName, beerName}) => {
+  const {height, width} = useWindowDimensions();
+
+  const mySpecialComputerStyleVariable = width * 1;
+
+  const BeerItem = ({item}) => {
+    return (
+      <View
+        style={[styles.itemContainer, {width: mySpecialComputerStyleVariable}]}>
+        <BCText textStyle="buttonText" value={breweryName} />
+        {/* <BCText textStyle="buttonText" value={item.breweryName} /> */}
+        <BCText textStyle="buttonText" value={beerName} />
+        {/* <BCText textStyle="buttonText" value={item.beerName} /> */}
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.helloText}>All My Beers</Text>
+      {/* <FlatList
+        data={dummyData}
+        renderItem={({item}) => <BeerItem item={item} />}
+        // keyExtractor
+      /> */}
+      <BeerItem />
     </View>
   );
 };
@@ -20,7 +54,14 @@ const styles = StyleSheet.create({
   },
   helloText: {
     color: brandColor,
-    fontSize: bigBigText,
+    fontSize: headerSize,
+  },
+  itemContainer: {
+    // backgroundColor: 'red',
+    borderColor: 'red',
+    borderWidth: 1,
+    height: 60, // TODO: DON'T USE STYLE LITERALS
+    padding: 5, // TODO: DON'T USE STYLE LITERALS
   },
 });
 

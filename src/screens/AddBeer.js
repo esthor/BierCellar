@@ -11,6 +11,7 @@ import {
 import {
   brandColor,
   gray,
+  gray_placeholder,
   lightPink,
   screenBackgroundColor,
 } from '../style/colors';
@@ -19,10 +20,9 @@ import {bigBigText, inputTextSize} from '../style/typography';
 import BCText from '../components/BCText';
 import BCButton from '../components/BCButton';
 
-const AddBeerForm = () => {
-  const [breweryName, setBreweryName] = useState('Brewery Name');
-  const [beerName, setBeerName] = useState('Beer Name');
+const AddBeerForm = ({setBreweryName, setBeerName, breweryName, beerName}) => {
   const {height, width} = useWindowDimensions();
+  console.log({breweryName});
 
   return (
     <View style={styles.container}>
@@ -30,11 +30,15 @@ const AddBeerForm = () => {
       <ScrollView style={[styles.inputFieldsContainer, {width: width}]}>
         <TextInput
           onChangeText={setBreweryName}
+          placeholder="Brewery Name"
+          placeholderTextColor={gray_placeholder}
           style={styles.input}
           value={breweryName}
         />
         <TextInput
           onChangeText={setBeerName}
+          placeholder="Beer Name"
+          placeholderTextColor={gray_placeholder}
           style={styles.input}
           value={beerName}
         />
@@ -54,10 +58,10 @@ const AddBeerForm = () => {
   );
 };
 
-const AddBeerScreen = () => {
+const AddBeerScreen = props => {
   return (
     <View style={styles.container}>
-      <AddBeerForm />
+      <AddBeerForm {...props} />
     </View>
   );
 };
